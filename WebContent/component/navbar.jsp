@@ -19,7 +19,7 @@
           <a class="nav-link active" aria-current="page" href="admin/admin_login.jsp">Admin</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Customer</a>
+          <a class="nav-link active" aria-current="page" href="customer/customer_login.jsp">Customer</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Distributor</a>
