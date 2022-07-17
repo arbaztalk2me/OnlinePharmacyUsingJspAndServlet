@@ -1,6 +1,7 @@
 package com.virtusa.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -9,16 +10,17 @@ import java.util.List;
 import com.virtusa.model.ViewOrders;
 
 public class ViewOrdersService {
-	public List<ViewOrders> getOrders() {
+	public List<ViewOrders> getOrders(int cusid) {
 		Connection con=MysqlConnection.getConnection();
 		List<ViewOrders> list=new ArrayList<>();
 		try {
-			Statement st=con.createStatement();
-			ResultSet rs=st.executeQuery("select orders.order_id,medicine.name,orders.customer_name,orders.address,orders.qty,orders.price,orders.status\r\n"
-					+ "from medicine join orders on medicine.medicine_id=orders.m_id");
+			PreparedStatement ps=con.prepareStatement("select * from orders where cust_id=?");
+			ps.setInt(1, cusid);
+			ResultSet rs=ps.executeQuery();
 			while(rs.next()) {
-				list.add(new ViewOrders(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getDouble(6),rs.getString(7)));
+				list.add(new ViewOrders(rs.getInt(1),rs.getInt(3),rs.getInt(5),rs.getInt(4),rs.getString(6),rs.getString(7),rs.getInt(8),rs.getDouble(2),rs.getString(9)));
 			}
+		System.out.println(list);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

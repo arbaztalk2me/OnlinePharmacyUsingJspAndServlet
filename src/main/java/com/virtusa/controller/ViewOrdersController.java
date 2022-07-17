@@ -12,8 +12,8 @@ public class ViewOrdersController {
 		service=new ViewOrdersService();
 	}
 	
-	public List<ViewOrders> getOrders(){
-		List<ViewOrders> list=service.getOrders();
+	public List<ViewOrders> getOrders(int id){
+		List<ViewOrders> list=service.getOrders(id);
 		return list;
 	}
 	

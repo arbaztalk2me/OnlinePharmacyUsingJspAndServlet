@@ -45,14 +45,22 @@
   </thead>
   <tbody>
   	<%
+  	HttpSession sess=request.getSession();
+  	Customer customer=(Customer)sess.getAttribute("cusObj");
 	ViewOrdersController vo=new ViewOrdersController();
-	List<ViewOrders>li=vo.getOrders();
+	List<ViewOrders>li=vo.getOrders(customer.getCustId());
 	for(ViewOrders ord:li){%>
 		<tr>
       <th scope="row"><%=ord.getOrder_id() %></th>
-      <td><%=ord.getMedname() %></td>
+      <%
+      	MedicineController mcon=new MedicineController();
+      	Medicine md=mcon.getMedicineById(ord.getMid());
+      %>
+      <td>
+      <%=md.getMedicineName() %>
+      </td>
       <td><%=ord.getCusname() %></td>
-      <td><%=ord.getAddr() %></td>
+      <td><%=ord.getCusname() %></td>
       <th><%=ord.getQty() %></th>
       <td><%=ord.getPrice() %></td>
       <td><%=ord.getStatus() %></td>
